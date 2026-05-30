@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VALCORE PVP | Softcore Rust Server</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#080808;
+--panel:#121212;
+--red:#d41111;
+--red2:#ff2d2d;
+--text:#ffffff;
+--gray:#9a9a9a;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Rajdhani',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.logo{
+font-size:5rem;
+font-weight:700;
+letter-spacing:5px;
+text-transform:uppercase;
+color:white;
+}
+
+.logo span{
+color:var(--red2);
+}
+
+.hero h2{
+font-size:2rem;
+margin-bottom:20px;
+color:var(--gray);
+}
+
+.feature-tags{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin:30px 0;
+}
+
+.tag{
+background:rgba(212,17,17,.15);
+border:1px solid var(--red);
+padding:12px 20px;
+border-radius:8px;
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 30px;
+border:none;
+cursor:pointer;
+font-size:1.1rem;
+font-weight:bold;
+border-radius:6px;
+transition:.3s;
+text-decoration:none;
+}
+
+.btn-primary{
+background:var(--red);
+color:white;
+}
+
+.btn-primary:hover{
+background:var(--red2);
+transform:translateY(-3px);
+}
+
+.btn-secondary{
+background:transparent;
+border:2px solid white;
+color:white;
+}
+
+.btn-secondary:hover{
+background:white;
+color:black;
+}
+
+section{
+padding:90px 8%;
+}
+
+.section-title{
+font-size:3rem;
+text-align:center;
+margin-bottom:60px;
+position:relative;
+}
+
+.section-title::after{
+content:'';
+width:100px;
+height:4px;
+background:var(--red);
+display:block;
+margin:10px auto;
+}
+
+.about{
+background:#0d0d0d;
+}
+
+.about p{
+max-width:900px;
+margin:auto;
+font-size:1.3rem;
+text-align:center;
+color:var(--gray);
+}
+
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--panel);
+padding:30px;
+border:1px solid #222;
+border-radius:12px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:var(--red);
+}
+
+.card h3{
+color:var(--red2);
+margin-bottom:15px;
+font-size:1.6rem;
+}
+
+.card p{
+color:var(--gray);
+line-height:1.6;
+}
+
+.stats{
+background:#0c0c0c;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.stat{
+background:var(--panel);
+padding:40px;
+text-align:center;
+border-radius:12px;
+}
+
+.stat h3{
+font-size:3rem;
+color:var(--red2);
+}
+
+.stat p{
+color:var(--gray);
+}
+
+.server-info{
+background:#101010;
+}
+
+.info-box{
+max-width:800px;
+margin:auto;
+background:var(--panel);
+padding:40px;
+border-radius:15px;
+}
+
+.info-item{
+display:flex;
+justify-content:space-between;
+padding:15px 0;
+border-bottom:1px solid #222;
+}
+
+.discord{
+text-align:center;
+background:
+linear-gradient(135deg,#111,#050505);
+}
+
+.discord h2{
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.discord p{
+margin-bottom:30px;
+color:var(--gray);
+font-size:1.2rem;
+}
+
+footer{
+padding:30px;
+text-align:center;
+background:black;
+border-top:1px solid #222;
+color:var(--gray);
+}
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+@media(max-width:768px){
+
+.logo{
+font-size:3rem;
+}
+
+.hero h2{
+font-size:1.3rem;
+}
+
+.section-title{
+font-size:2rem;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1 class="logo">VALCORE <span>PVP</span></h1>
+
+<h2>The Ultimate Softcore Rust Experience</h2>
+
+<div class="feature-tags">
+<div class="tag">🛡️ Softcore</div>
+<div class="tag">⏰ Player Raid Times</div>
+<div class="tag">🏰 24/7 Raidable Bases</div>
+<div class="tag">⛏️ 2x Gather</div>
+<div class="tag">🎉 Events</div>
+<div class="tag">⚙️ QoL</div>
+</div>
+
+<div class="buttons">
+<a href="91.229.114.90:28024" class="btn btn-primary">
+JOIN SERVER
+</a>
+
+<a href="https://discord.gg/surVkXRArU" class="btn btn-secondary">
+DISCORD
+</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="about reveal">
+
+<h2 class="section-title">WELCOME TO VALCORE</h2>
+
+<p>
+VALCORE PVP is a premium Softcore Rust experience built for players
+who want competitive PvP without endless grinding.
+Enjoy balanced progression, player raid times, custom events,
+24/7 raidable bases, and an active community.
+</p>
+
+</section>
+
+<section class="reveal">
+
+<h2 class="section-title">SERVER FEATURES</h2>
+
+<div class="features-grid">
+
+<div class="card">
+<h3>🛡️ Softcore</h3>
+<p>
+Less punishing gameplay while keeping Rust's competitive spirit alive.
+</p>
+</div>
+
+<div class="card">
+<h3>⏰ Player Raid Times</h3>
+<p>
+Structured raiding windows encourage online battles and fair fights.
+</p>
+</div>
+
+<div class="card">
+<h3>🏰 24/7 Raidable Bases</h3>
+<p>
+PvE raid content available around the clock with valuable rewards.
+</p>
+</div>
+
+<div class="card">
+<h3>⛏️ 2x Gather</h3>
+<p>
+Spend less time farming and more time fighting.
+</p>
+</div>
+
+<div class="card">
+<h3>🎉 Events</h3>
+<p>
+Regular server-wide events, PvP tournaments and custom activities.
+</p>
+</div>
+
+<div class="card">
+<h3>⚙️ Quality Of Life</h3>
+<p>
+Improved gameplay systems designed around fun and balance.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="stats reveal">
+
+<h2 class="section-title">SERVER STATS</h2>
+
+<div class="stats-grid">
+
+<div class="stat">
+<h3 id="players">150</h3>
+<p>Players Online</p>
+</div>
+
+<div class="stat">
+<h3>2x</h3>
+<p>Gather Rate</p>
+</div>
+
+<div class="stat">
+<h3>24/7</h3>
+<p>Raidable Bases</p>
+</div>
+
+<div class="stat">
+<h3>100%</h3>
+<p>Action</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="server-info reveal">
+
+<h2 class="section-title">SERVER INFORMATION</h2>
+
+<div class="info-box">
+
+<div class="info-item">
+<span>Server Name</span>
+<span>VALCORE PVP</span>
+</div>
+
+<div class="info-item">
+<span>Mode</span>
+<span>Softcore</span>
+</div>
+
+<div class="info-item">
+<span>Gather Rate</span>
+<span>2x</span>
+</div>
+
+<div class="info-item">
+<span>Raidable Bases</span>
+<span>24/7</span>
+</div>
+
+<div class="info-item">
+<span>Events</span>
+<span>Enabled</span>
+</div>
+
+<div class="info-item">
+<span>Player Raid Times</span>
+<span>Enabled</span>
+</div>
+
+</div>
+
+</section>
+
+<section class="discord reveal">
+
+<h2>JOIN OUR COMMUNITY</h2>
+
+<p>
+Stay updated with wipes, events, announcements and giveaways.
+</p>
+
+<a href="https://discord.gg/YOURDISCORD" class="btn btn-primary">
+JOIN DISCORD
+</a>
+
+</section>
+
+<footer>
+
+<h3>VALCORE PVP</h3>
+
+<p>
+Built For Action. Made For Players.
+</p>
+
+</footer>
+
+<script>
+
+const reveals = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', () => {
+
+reveals.forEach(item => {
+
+const top = item.getBoundingClientRect().top;
+
+if(top < window.innerHeight - 100){
+item.classList.add('active');
+}
+
+});
+
+});
+
+let count = 0;
+
+const players = document.getElementById('players');
+
+const interval = setInterval(() => {
+
+count++;
+
+players.innerText = count;
+
+if(count >= 150){
+clearInterval(interval);
+}
+
+},10);
+
+</script>
+
+</body>
+</html>
